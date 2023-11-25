@@ -8,3 +8,5 @@
 
 # 3、laravel10使用redis 注意事项
 - .env记得添加：REDIS_CLIENT=predis
+- npm install socket.io ioredis --save //安装ioredis
+

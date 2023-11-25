@@ -18,9 +18,14 @@ use Illuminate\Support\Facades\Redis;
 Route::get('/', function () {
 //    return view('welcome');
 
-    Redis::set('name', 'Lzc');
+//    Redis::set('name', 'Lzc');
 
-    \Illuminate\Support\Facades\Cache::put('foo', 'bar', 10);
-
-    return Redis::get('name');
+    $data = [
+        'event' => 'aNewMessage',
+        'data'  => [
+            'name' => 'Jelly'
+        ]
+    ];
+    Redis::publish('test-channel', json_encode($data));
+//    return Redis::get('name');
 });
