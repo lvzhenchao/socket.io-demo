@@ -14,8 +14,12 @@ var redis = new Redis({
 
 redis.subscribe('test-channel');
 
-redis.on('message', function (channel, msg) {
-    console.log(msg);
+redis.on('message', function (channel, message) {
+    message = JSON.parse(message);
+    io.emit(channel + ':' + message.event, message.data);
+    // console.log(message);
+    // console.log(message.data.name);
+    // console.log("数据...");
 });
 
 http.listen(3000, function () {

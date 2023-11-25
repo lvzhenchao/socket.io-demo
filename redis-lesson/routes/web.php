@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Redis;
 Route::get('/', function () {
 //    return view('welcome');
 
-//    Redis::set('name', 'Lzc');
+//    $a = Redis::set('name', 'Lzc');
 
     $data = [
         'event' => 'aNewMessage',
@@ -26,6 +26,10 @@ Route::get('/', function () {
             'name' => 'Jelly'
         ]
     ];
-    Redis::publish('test-channel', json_encode($data));
+    $test = Redis::publish('test-channel', json_encode($data));
+    var_dump($test);die;
+
+    return "Done";
+
 //    return Redis::get('name');
 });
