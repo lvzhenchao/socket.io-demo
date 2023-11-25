@@ -20,5 +20,7 @@ Route::get('/', function () {
 
     Redis::set('name', 'Lzc');
 
+    \Illuminate\Support\Facades\Cache::put('foo', 'bar', 10);
+
     return Redis::get('name');
 });
