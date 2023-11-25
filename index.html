@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--    <h1>Hello world!!!</h1>-->
+    <ul id="messages"></ul>
+    <form action="">
+        <input type="text" autocomplete="off" id="message">
+        <button>Send</button>
+    </form>
+<!--    cdn引入相关静态文件-->
+    <script src="https://cdn.bootcdn.net/ajax/libs/socket.io/4.7.2/socket.io.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.7.1/jquery.js"></script>
+</body>
+</html>
+<script>
+    var socket = io();
+    $('form').submit(function () {
+        //传递后端, 自己设定的频道号，key值
+
+        var message = $('#message').val();
+        socket.emit('chat.message', message)
+        $("#message").val();
+
+        return false;
+    });
+
+
+    socket.on('chat.message', function (msg) {
+        console.log(msg);
+        $("#messages").append($('<li>').text(msg));
+    });
+</script>
